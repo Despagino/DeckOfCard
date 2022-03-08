@@ -11,6 +11,9 @@ class CardViewController: UIViewController {
 
     var cardManager = CardManager()
     
+    @IBOutlet weak var cardImage: UIImageView!
+    @IBOutlet weak var name: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

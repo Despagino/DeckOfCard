@@ -7,9 +7,17 @@
 
 import Foundation
 
+protocol CardManagerDelegate {
+    
+    func didUpdateCard(_ cardManager: CardManager, card: CardModel)
+    
+}
+
 struct CardManager {
     
     let baseURL = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
+    
+    var delegate: CardManagerDelegate?
     
     // MARK: - Calling to the API
     
@@ -34,7 +42,7 @@ struct CardManager {
                 //format the data we get back
                 if let safeData = data {
                     if let card = self.parseJSON(safeData) {
-                        print(card)
+                        self.delegate?.didUpdateCard(self, card: card)
                     }
                 }
             }

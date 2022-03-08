@@ -48,6 +48,10 @@
                             <constraint firstItem="Ixb-tW-QIa" firstAttribute="centerX" secondItem="nnh-Nz-poV" secondAttribute="centerX" id="Ogl-MX-xvn"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cardImage" destination="nnh-Nz-poV" id="QJP-hJ-C3o"/>
+                        <outlet property="name" destination="lUp-mD-RO3" id="PEh-cr-zf4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
