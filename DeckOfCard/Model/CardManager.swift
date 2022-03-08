@@ -13,7 +13,15 @@ struct CardManager {
     
     func getOneCard() {
         
+        // setting up URL
         let urlString = "\(baseURL)"
+        
+        if let url = URL(string: urlString) {
+            
+            //create session object
+            let session = URLSession(configuration: .default)
+            
+        }
         
     }
     
