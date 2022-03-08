@@ -11,6 +11,8 @@ struct CardManager {
     
     let baseURL = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
     
+    // MARK: - Calling to the API
+    
     func getOneCard() {
         
         // setting up URL
@@ -21,8 +23,43 @@ struct CardManager {
             //create session object
             let session = URLSession(configuration: .default)
             
+            // create new task
+            let task = session.dataTask(with: url) { (data, response, error) in
+                
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                
+                //format the data we get back
+                if let safeData = data {
+                    if let card = self.parseJSON(safeData) {
+                        print(card)
+                    }
+                }
+            }
+            task.resume()
         }
-        
     }
     
+    // MARK: - parsing the data we get
+    
+    func parseJSON(_ data: Data) -> CardModel? {
+        
+        let decoder = JSONDecoder()
+        do {
+            let decodedData = try decoder.decode(CardData.self, from: data)
+            
+            let cardImage = decodedData.cards[0].image
+            let suit = decodedData.cards[0].suit
+            let value = decodedData.cards[0].value
+            
+            let card = CardModel(cardImage: cardImage, suit: suit, value: value)
+            return card
+        }
+        catch {
+            print(error)
+            return nil
+        }
+    }
 }
