@@ -7,8 +7,8 @@
 
 import UIKit
 
-class CardViewController: UIViewController {
-
+class CardViewController: UIViewController, CardManagerDelegate {
+   
     var cardManager = CardManager()
     
     @IBOutlet weak var cardImage: UIImageView!
@@ -17,11 +17,16 @@ class CardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        cardManager.delegate = self
     }
 
     @IBAction func drawButtonPressed(_ sender: UIButton) {
         cardManager.getOneCard()
     }
-    
+
+    func didUpdateCard(_ cardManager: CardManager, card: CardModel) {
+        DispatchQueue.main.async {
+            self.name.text = "\(card.value) of \(card.suit)"
+        }
+    }
 }
