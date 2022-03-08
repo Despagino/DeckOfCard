@@ -45,7 +45,6 @@ struct CardManager {
                 if let safeData = data {
                     if let card = self.parseJSON(safeData) {
                         self.delegate?.didUpdateCard(self, card: card)
-                        print(card)
                     }
                 }
             }
